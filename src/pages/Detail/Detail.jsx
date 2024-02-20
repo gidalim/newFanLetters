@@ -1,10 +1,11 @@
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Button from "../../components/commons/buttons/Button"
+import Button from "../../components/commons/buttons/Button";
 import CommentModal from "../../components/units/detailComponent/CommentModal";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteLetter, updateLetter } from "../../redux/modules/fanLetterSlice";
 import { openModal, closeModal } from "../../redux/modules/modalSlice"
+
 
 function Detail() {
   const { id } = useParams();
@@ -13,10 +14,10 @@ function Detail() {
   const { fanLetters } = useSelector(state => state.fanLetterSlice);
   const { isModalOpen, isDivVisible, editContent } = useSelector(state => state.modalSlice);
 
-  const letter = fanLetters.find(item => item.id === id);
+  const letter = fanLetters.find(item => item.id === parseInt(id, 10));
 
   const openModalHandler = () => {
-    dispatch(openModal(letter.content));
+    dispatch(openModal({ content: letter.content, isDivVisible: false }));
   };
 
   const changedHandler = () => {
@@ -25,7 +26,7 @@ function Detail() {
       return;
     }
 
-    const updatedFanLetter = { ...letter, content: editContent }
+    const updatedFanLetter = { ...letter, content: editContent };
     dispatch(updateLetter(updatedFanLetter));
     dispatch(closeModal());
     navigate('/');
@@ -34,16 +35,15 @@ function Detail() {
   const deletedHandler = () => {
     const isConfirmed = window.confirm('정말로 삭제하시겠어요?');
 
-
     if (isConfirmed) {
-      dispatch(deleteLetter(id))
+      dispatch(deleteLetter(id));
       navigate('/');
     }
   }
 
   const goHomeBtn = () => {
     dispatch(closeModal());
-    navigate('/')
+    navigate('/');
   }
 
   return (
@@ -74,7 +74,6 @@ function Detail() {
             changedHandler={changedHandler}
             editContent={editContent}
           />
-
         </StBox >
       ) : (
         <p>팬레터가 존재하지 않아요!</p>
@@ -84,8 +83,6 @@ function Detail() {
 }
 
 export default Detail
-
-
 
 const StBtn = styled.button`
 
@@ -122,10 +119,7 @@ const StFanLetterBox = styled.section`
   background-color: #f3e1edad;
   width: 100%;
   height:150px;
-  
-
 `
-
 
 const StImg = styled.figure`
   width: 120px;
