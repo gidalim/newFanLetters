@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import fanLetter from "../modules/fanLetter";
+import fanLetterSlice from "../modules/fanLetterSlice";
+import modalSlice from "../modules/modalSlice";
 
 const store = configureStore({
   reducer: {
-    fanLetter,
+    fanLetterSlice,
+    modalSlice,
   },
 });
 

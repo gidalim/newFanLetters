@@ -1,5 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
 import initialData from "../../shared/db.json";
+console.log(initialData);
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+// import axios from "axios";
+
+// export const fetchFanLetters = createAsyncThunk(
+//   "fanLetters/fetchFanLetters",
+//   async () => {
+//     const response = await axios.get("/path/to/db.json");
+//     return response.data;
+//   }
+// );
 
 const initialState = {
   fanLetters: initialData,
