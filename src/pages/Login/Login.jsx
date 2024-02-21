@@ -18,12 +18,27 @@ function Login() {
   const [userNickname, setUserNickname] = useState('')
 
 
+
+  //sonetto id, pass, nick
+
   const onSubmitUserData = async (e) => {
     e.preventDefault()
     if (LoginPage) {
-      dispatch(login());
-      alert('로그인 성공!')
-      navigate('/')
+      try {
+        const { data } = await axios.post('https://moneyfulpublicpolicy.co.kr/login',
+          {
+            id: userId,
+            password: userPassword,
+          }
+        )
+        if (data.success) {
+          dispatch(login());
+          alert('로그인 성공!')
+          navigate('/')
+        }
+      } catch (error) {
+        console.error('로그인실패', error.response)
+      }
     } else {
       try {
         const { data } = await axios.post('https://moneyfulpublicpolicy.co.kr/register',
