@@ -1,20 +1,16 @@
 import { useState } from 'react';
 import Button from '../../commons/buttons/Button';
-import profile from '../../../assets/deFaultProfile.png';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addLetter } from '../../../redux/modules/fanLetterSlice';
 
 function CommentCreator() {
 
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
+  const { avatar, nickname } = useSelector(state => state.authSlice)
   const [content, setContent] = useState('');
   const [selectedPage, setSelectedPage] = useState('카리나');
 
-  const addName = (e) => {
-    setName(e.target.value)
-  }
   const addContent = (e) => {
     setContent(e.target.value)
   }
@@ -22,22 +18,21 @@ function CommentCreator() {
   const addButtonHandler = (e) => {
     e.preventDefault();
 
-    if (!name.trim() || !content.trim()) {
-      alert('닉네임과 팬레터 내용을 모두 입력해주세요!');
+    if (!content.trim()) {
+      alert('팬레터 내용을 입력해주세요!');
       return;
     }
 
     const addComment = {
       id: Date.now(),
-      profile: profile,
-      name,
+      profile: avatar,
+      nickname,
       content,
       time: new Date().toISOString(),
       selectedPage: selectedPage,
     };
 
     dispatch(addLetter(addComment));
-    setName('')
     setContent('')
     window.alert('팬레터를 발송했습니다!')
   }
@@ -47,13 +42,7 @@ function CommentCreator() {
       <StBox className='inputData'>
         <StSection>
           <StLabel>닉네임:</StLabel>
-          <input type="text"
-            className="inputName"
-            maxLength={'10'}
-            placeholder='닉네임은 10글자까지 작성 가능해요.'
-            value={name}
-            onChange={addName}
-          />
+          <span>{nickname}</span>
         </StSection>
         <StSectionComment>
           <StLabel>팬레터:</StLabel>
@@ -90,10 +79,6 @@ function CommentCreator() {
 
 export default CommentCreator
 
-
-
-
-
 const StSection = styled.section`
   display: flex;
   align-items: center;
@@ -112,7 +97,6 @@ const StSection = styled.section`
   
 `
 
-
 const StSelector = styled.select`
   text-align: center;
   border: 1px solid #C4C4C4;
@@ -120,7 +104,6 @@ const StSelector = styled.select`
   width: 90px;
   color: black;
 `
-
 
 const StSectionComment = styled.section`
   display: flex;
@@ -135,9 +118,6 @@ const StSectionComment = styled.section`
     height: 200px;
     font-size: 1.3rem;
     }
-  
-
-
 `
 const StLabel = styled.label`
   font-size: 1.2rem;
@@ -155,6 +135,7 @@ const StBox = styled.div`
   background-color: #f3e1ed;
   padding: 15px;
 `
+
 const StSelectArea = styled.div`
   display: flex;
   justify-content: flex-end;

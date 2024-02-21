@@ -1,4 +1,4 @@
-import initialData from "../../shared/db.json";
+import initialData from "../../shared/fakedb.json";
 console.log(initialData);
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";

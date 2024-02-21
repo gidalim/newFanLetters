@@ -14,7 +14,7 @@ function Detail() {
   const { fanLetters } = useSelector(state => state.fanLetterSlice);
   const { isModalOpen, isDivVisible, editContent } = useSelector(state => state.modalSlice);
 
-  const letter = fanLetters.find(item => item.id === parseInt(id, 10));
+  const letter = fanLetters.find(letter => letter.id.toString() === id);
 
   const openModalHandler = () => {
     dispatch(openModal({ content: letter.content, isDivVisible: false }));

@@ -12,14 +12,14 @@ function Login() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [LoginPage, setLoginPage] = useState(false);
+  const [LoginPage, setLoginPage] = useState(login);
   const [userId, setUserId] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const [userNickname, setUserNickname] = useState('')
 
 
 
-  //sonetto id, pass, nick
+  //sonetto id, pass, nickname
 
   const onSubmitUserData = async (e) => {
     e.preventDefault()
@@ -31,8 +31,9 @@ function Login() {
             password: userPassword,
           }
         )
+        const { accessToken, avatar, nickname, userId: serverId } = data;
         if (data.success) {
-          dispatch(login());
+          dispatch(login({ accessToken, avatar, nickname, userId: serverId }));
           alert('로그인 성공!')
           navigate('/')
         }
@@ -79,11 +80,15 @@ function Login() {
         {LoginPage ? (
           <StDiv>
             <p>로그인</p>
-            <input placeholder="아이디 입력"
+            <input placeholder="아이디 입력(4~10 자리)"
+              minLength={'4'}
+              maxLength={'10'}
               value={userId}
               onChange={onChangeIdData}
             />
-            <input placeholder="패스워드 입력"
+            <input placeholder="패스워드 입력(4~15 자리)"
+              minLength={'4'}
+              maxLength={'15'}
               value={userPassword}
               onChange={onChangePassWordData}
             />
@@ -95,15 +100,21 @@ function Login() {
         ) : (
           <StDiv>
             <p>회원가입</p>
-            <input placeholder="아이디 입력"
+            <input placeholder="아이디 입력(4~10 자리)"
+              minLength={'4'}
+              maxLength={'10'}
               value={userId}
               onChange={onChangeIdData}
             />
-            <input placeholder="패스워드 입력"
+            <input placeholder="패스워드 입력(4~15 자리)"
+              minLength={'4'}
+              maxLength={'15'}
               value={userPassword}
               onChange={onChangePassWordData}
             />
-            <input placeholder="닉네임 입력"
+            <input placeholder="닉네임 입력(1~10 자리)"
+              minLength={'1'}
+              maxLength={'10'}
               value={userNickname}
               onChange={onChangeNickNameData}
             />

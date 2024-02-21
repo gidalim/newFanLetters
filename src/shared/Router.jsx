@@ -13,12 +13,13 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {isLoggedin ? (<>
-          <Route path="/" element={<Home />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="*" element={<Navigate replace to="/" />} />
-        </>
+        {isLoggedin ? (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="*" element={<Navigate replace to="/" />} />
+          </>
         ) : (
           <>
             <Route path="/" element={<Home />} />
