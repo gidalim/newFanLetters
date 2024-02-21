@@ -1,17 +1,20 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../components/commons/buttons/Button";
+import { __editProfile } from "../../redux/modules/authSlice";
 
 
 function MyPage() {
 
   const { avatar, nickname, userId } = useSelector((state) => state.authSlice);
+  const dispatch = useDispatch();
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingText, setEditingText] = useState('')
   const [selectedImg, setSelectedImg] = useState(avatar);
+  const [file, setFile] = useState(null);
 
 
   const previewImg = (e) => {
@@ -19,12 +22,22 @@ function MyPage() {
     if (imgFile.size > 1024 * 1024) {
       return alert('최대 1MB까지 업로드 가능합니다')
     }
+    setFile(imgFile)
 
     const imgUrl = URL.createObjectURL(imgFile)
     setSelectedImg(imgUrl)
   }
 
   const onEditDone = () => {
+    const formData = new FormData();
+    if (editingText) {
+      formData.append('nickname', editingText)
+    }
+    if (selectedImg !== avatar) {
+      formData.append('avatar', file)
+    }
+    dispatch(__editProfile(formData))
+    setIsEditing(false)
     alert('수정 완료!')
 
   }
