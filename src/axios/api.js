@@ -18,8 +18,7 @@ authApi.interceptors.request.use(
   async function (config) {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
-      console.log("토큰 확인용", accessToken);
-      config.headers["Authorization"] = `Bearer ${accessToken}`;
+      config.headers.authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
@@ -48,7 +47,7 @@ authApi.interceptors.response.use(
 //   async function (config) {
 //     const accessToken = localStorage.getItem("accessToken");
 //     if (accessToken) {
-//       config.headers["Authorization"] = `Bearer ${accessToken}`;
+//       config.headers.authorization = `Bearer ${accessToken}`;
 //     }
 //     return config;
 //   },

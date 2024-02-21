@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../components/commons/buttons/Button";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/modules/authSlice";
+import { __login } from "../../redux/modules/authSlice";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "../../axios/api";
 
@@ -12,10 +12,10 @@ function Login() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [LoginPage, setLoginPage] = useState(login);
-  const [userId, setUserId] = useState('')
-  const [userPassword, setUserPassword] = useState('')
-  const [userNickname, setUserNickname] = useState('')
+  const [LoginPage, setLoginPage] = useState(true);
+  const [id, setId] = useState('')
+  const [password, setPassword] = useState('')
+  const [nickname, setNickname] = useState('')
 
 
 
@@ -24,37 +24,31 @@ function Login() {
   const onSubmitUserData = async (e) => {
     e.preventDefault()
     if (LoginPage) {
-      try {
-        const { data } = await authApi.post('/login',
-          {
-            id: userId,
-            password: userPassword,
+
+      dispatch(__login({ id, password }))
+        .then((action) => {
+          if (__login.fulfilled.match(action)) {
+            navigate('/')
           }
-        )
-        const { accessToken, avatar, nickname, userId: serverId } = data;
-        if (data.success) {
-          dispatch(login({ accessToken, avatar, nickname, userId: serverId }));
-          alert('로그인 성공!')
-          navigate('/')
-        }
-      } catch (error) {
-        console.error('로그인실패', error.response)
-      }
+        })
+        .catch((error) => {
+          alert('로그인 에러', error)
+        })
     } else {
       try {
         const { data } = await authApi.post('/register',
           {
-            id: userId,
-            password: userPassword,
-            nickname: userNickname,
+            id,
+            password,
+            nickname,
           }
         )
         if (data.success) {
           setLoginPage(true)
           alert('회원가입 성공!')
-          setUserId('')
-          setUserPassword('')
-          setUserNickname('')
+          setId('')
+          setPassword('')
+          setNickname('')
         }
       } catch (error) {
         console.error('가입실패', error.response)
@@ -63,13 +57,13 @@ function Login() {
   }
 
   const onChangeIdData = (e) => {
-    setUserId(e.target.value)
+    setId(e.target.value)
   }
   const onChangePassWordData = (e) => {
-    setUserPassword(e.target.value)
+    setPassword(e.target.value)
   }
   const onChangeNickNameData = (e) => {
-    setUserNickname(e.target.value)
+    setNickname(e.target.value)
   }
 
 
@@ -83,13 +77,13 @@ function Login() {
             <input placeholder="아이디 입력(4~10 자리)"
               minLength={'4'}
               maxLength={'10'}
-              value={userId}
+              value={id}
               onChange={onChangeIdData}
             />
             <input placeholder="패스워드 입력(4~15 자리)"
               minLength={'4'}
               maxLength={'15'}
-              value={userPassword}
+              value={password}
               onChange={onChangePassWordData}
             />
             <StDiv3>
@@ -103,19 +97,19 @@ function Login() {
             <input placeholder="아이디 입력(4~10 자리)"
               minLength={'4'}
               maxLength={'10'}
-              value={userId}
+              value={id}
               onChange={onChangeIdData}
             />
             <input placeholder="패스워드 입력(4~15 자리)"
               minLength={'4'}
               maxLength={'15'}
-              value={userPassword}
+              value={password}
               onChange={onChangePassWordData}
             />
             <input placeholder="닉네임 입력(1~10 자리)"
               minLength={'1'}
               maxLength={'10'}
-              value={userNickname}
+              value={nickname}
               onChange={onChangeNickNameData}
             />
             <StDiv3>
