@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 
 function Home() {
 
+  // const isLoggedin = useSelector(state => state.authSlice.isLoggedin)
   const { fanLetters } = useSelector(state => state.fanLetterSlice);
   const [selectedBtn, setSelectedBtn] = useState('카리나');
   const members = ['카리나', '지젤', '윈터', '닝닝']
@@ -14,8 +15,10 @@ function Home() {
 
   const filteredFanLetter = (selectedPage) => {
     setSelectedBtn(selectedPage)
-
   }
+
+  //로그인 체크용
+  const isLoggedin = true
 
   return (
     <>
@@ -24,6 +27,17 @@ function Home() {
           <div>팬레터 제작하기</div>
           <div>React_4기 박강토</div>
         </StName>
+        {isLoggedin ? (
+          <>
+            <button>마이페이지</button>
+            <button>로그아웃</button>
+          </>
+        ) : (
+          <>
+            <button>로그인하기</button>
+            <button>회원가입하기</button>
+          </>
+        )}
         <StMember>
           {members.map(member => (
             <Button
@@ -58,6 +72,8 @@ const StHeader = styled.header`
   width: 1100px;
   height: 150px;
   background-color: #f5eee6;
+  margin-bottom: 15px;
+  gap: 15px;
   `
 
 const StName = styled.h1`

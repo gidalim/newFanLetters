@@ -159,4 +159,5 @@ const StSelectArea = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 240px;
+  gap: 15px;
 `
