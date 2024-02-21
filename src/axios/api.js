@@ -44,20 +44,20 @@ authApi.interceptors.response.use(
   }
 );
 
-jsonApi.interceptors.request.use(
-  async function (config) {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      config.headers["Authorization"] = `Bearer ${accessToken}`;
-    }
-    return config;
-  },
+// jsonApi.interceptors.request.use(
+//   async function (config) {
+//     const accessToken = localStorage.getItem("accessToken");
+//     if (accessToken) {
+//       config.headers["Authorization"] = `Bearer ${accessToken}`;
+//     }
+//     return config;
+//   },
 
-  function (error) {
-    console.log("인터셉터 요청 오류, error");
-    return Promise.reject(error);
-  }
-);
+//   function (error) {
+//     console.log("인터셉터 요청 오류, error");
+//     return Promise.reject(error);
+//   }
+// );
 
 // const formData = new FormData();
 // // avatar와 nickname 중 하나 또느 모두 변경 가능

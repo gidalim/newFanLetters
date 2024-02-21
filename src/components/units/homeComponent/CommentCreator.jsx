@@ -25,7 +25,7 @@ function CommentCreator() {
     }
 
     const addComment = {
-      id: Date.now(),
+      id: Date.now().toString(),
       profile: avatar || defaultImg,
       nickname,
       content,

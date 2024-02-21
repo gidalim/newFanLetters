@@ -1,47 +1,29 @@
 {
   "letters": [
     {
-      "id": 1708493440704,
+      "id": "1708503633788",
       "profile": "null",
       "nickname": "sonetto",
-      "content": "1회차",
-      "time": "2024-02-21T05:30:40.704Z",
+      "content": "ㅇㅁㄴㅇ",
+      "time": "2024-02-21T08:20:33.788Z",
       "selectedPage": "카리나",
       "userId": "sonetto"
     },
     {
-      "id": 1708493443852,
+      "id": "1708503635550",
       "profile": "null",
       "nickname": "sonetto",
-      "content": "2회차",
-      "time": "2024-02-21T05:30:43.852Z",
+      "content": "22222",
+      "time": "2024-02-21T08:20:35.550Z",
       "selectedPage": "카리나",
       "userId": "sonetto"
     },
     {
-      "id": 1708493446224,
+      "id": "1708503639096",
       "profile": "null",
       "nickname": "sonetto",
-      "content": "3회차",
-      "time": "2024-02-21T05:30:46.224Z",
-      "selectedPage": "카리나",
-      "userId": "sonetto"
-    },
-    {
-      "id": 1708494755484,
-      "profile": "null",
-      "nickname": "sonetto",
-      "content": "ㅇㅁㄴ",
-      "time": "2024-02-21T05:52:35.484Z",
-      "selectedPage": "지젤",
-      "userId": "sonetto"
-    },
-    {
-      "id": 1708498298433,
-      "profile": "null",
-      "nickname": "sonetto",
-      "content": "ㅇㄴㅁㅇㅁㄴㅇ",
-      "time": "2024-02-21T06:51:38.433Z",
+      "content": "3123",
+      "time": "2024-02-21T08:20:39.096Z",
       "selectedPage": "카리나",
       "userId": "sonetto"
     }
