@@ -72,13 +72,10 @@ const StName = styled.h1`
   margin-top: 20px;
   background-color: #f5eee6;
 
-
   a {
     text-decoration: none;
     color: inherit;
 
-
-    //임시
     &:hover {
       color : #7c63d6;
     }

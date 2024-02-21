@@ -9,6 +9,9 @@ const StBtn = styled.button`
   background-image: linear-gradient(to right, skyblue, #fcb9fc) ;
   color: white;
   line-height: 1;
+  cursor: pointer;
+  
+
   ${props => props.$isActive && `
     background-image : none;
     background-color :#7c63d6;

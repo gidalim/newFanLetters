@@ -25,7 +25,7 @@ function Login() {
     e.preventDefault()
     if (LoginPage) {
       try {
-        const { data } = await authApi.post('/login?expiresIn=5m',
+        const { data } = await authApi.post('/login',
           {
             id: userId,
             password: userPassword,

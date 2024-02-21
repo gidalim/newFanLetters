@@ -1,31 +1,22 @@
 {
   "letters": [
     {
-      "id": "1708503633788",
-      "profile": "null",
+      "id": "1708511586800",
+      "profile": "/src/assets/img.png",
       "nickname": "sonetto",
-      "content": "ㅇㅁㄴㅇ",
-      "time": "2024-02-21T08:20:33.788Z",
+      "content": "개잘됨",
+      "time": "2024-02-21T10:33:06.800Z",
       "selectedPage": "카리나",
       "userId": "sonetto"
     },
     {
-      "id": "1708503635550",
-      "profile": "null",
-      "nickname": "sonetto",
-      "content": "22222",
-      "time": "2024-02-21T08:20:35.550Z",
+      "id": "1708513244971",
+      "profile": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-16/bc9ff213-71a6-4b2f-8e47-becd766d9e2e.jpg",
+      "nickname": "반디",
+      "content": "와 신나요",
+      "time": "2024-02-21T11:00:44.971Z",
       "selectedPage": "카리나",
-      "userId": "sonetto"
-    },
-    {
-      "id": "1708503639096",
-      "profile": "null",
-      "nickname": "sonetto",
-      "content": "3123",
-      "time": "2024-02-21T08:20:39.096Z",
-      "selectedPage": "카리나",
-      "userId": "sonetto"
+      "userId": "firefly"
     }
   ]
 }

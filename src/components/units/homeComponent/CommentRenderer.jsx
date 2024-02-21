@@ -15,10 +15,10 @@ const CommentRenderer = ({ filteredData }) => {
       >
         <StCommentBox className='StCommentBox'>
           <StImg>
-            <img src={item.profile} alt={item.name} />
+            <img src={item.profile} alt={item.nickname} />
           </StImg>
           <StProfile>
-            <span>{item.name}</span>
+            <span>{item.nickname}</span>
             <time dateTime={item.time}>{new Date(item.time).toLocaleString()}</time>
           </StProfile>
         </StCommentBox>
