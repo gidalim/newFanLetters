@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/modules/authSlice";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { authApi } from "../../axios/api";
 
 
 function Login() {
@@ -25,7 +25,7 @@ function Login() {
     e.preventDefault()
     if (LoginPage) {
       try {
-        const { data } = await axios.post('https://moneyfulpublicpolicy.co.kr/login',
+        const { data } = await authApi.post('/login?expiresIn=5m',
           {
             id: userId,
             password: userPassword,
@@ -42,7 +42,7 @@ function Login() {
       }
     } else {
       try {
-        const { data } = await axios.post('https://moneyfulpublicpolicy.co.kr/register',
+        const { data } = await authApi.post('/register',
           {
             id: userId,
             password: userPassword,

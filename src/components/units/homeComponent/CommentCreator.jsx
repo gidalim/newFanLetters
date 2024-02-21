@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import defaultImg from '../../../assets/img.png'
 import Button from '../../commons/buttons/Button';
 import styled from 'styled-components';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addLetter } from '../../../redux/modules/fanLetterSlice';
+import { __addLetter } from '../../../redux/modules/fanLetterSlice';
 
 function CommentCreator() {
 
   const dispatch = useDispatch();
-  const { avatar, nickname } = useSelector(state => state.authSlice)
+  const { avatar, nickname, userId } = useSelector(state => state.authSlice)
   const [content, setContent] = useState('');
   const [selectedPage, setSelectedPage] = useState('카리나');
 
@@ -25,14 +26,15 @@ function CommentCreator() {
 
     const addComment = {
       id: Date.now(),
-      profile: avatar,
+      profile: avatar || defaultImg,
       nickname,
       content,
       time: new Date().toISOString(),
       selectedPage: selectedPage,
+      userId,
     };
 
-    dispatch(addLetter(addComment));
+    dispatch(__addLetter(addComment));
     setContent('')
     window.alert('팬레터를 발송했습니다!')
   }

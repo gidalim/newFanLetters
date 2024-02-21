@@ -5,6 +5,7 @@ import CommentModal from "../../components/units/detailComponent/CommentModal";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteLetter, updateLetter } from "../../redux/modules/fanLetterSlice";
 import { openModal, closeModal } from "../../redux/modules/modalSlice"
+// import MyPage from "../MyPage/MyPage";
 
 
 function Detail() {
@@ -13,8 +14,11 @@ function Detail() {
   const dispatch = useDispatch();
   const { fanLetters } = useSelector(state => state.fanLetterSlice);
   const { isModalOpen, isDivVisible, editContent } = useSelector(state => state.modalSlice);
-
+  // const loginUserId = useSelector(state => state.authSlice.userId)
   const letter = fanLetters.find(letter => letter.id.toString() === id);
+
+  // const usersMyPage = loginUserId === userId
+
 
   const openModalHandler = () => {
     dispatch(openModal({ content: letter.content, isDivVisible: false }));
@@ -74,6 +78,7 @@ function Detail() {
             changedHandler={changedHandler}
             editContent={editContent}
           />
+
         </StBox >
       ) : (
         <p>팬레터가 존재하지 않아요!</p>

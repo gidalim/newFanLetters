@@ -23,7 +23,7 @@ const authSlice = createSlice({
       state.userId = userId;
     },
 
-    logout: (state, action) => {
+    logout: (state) => {
       state.isLoggedin = false;
       localStorage.clear();
     },

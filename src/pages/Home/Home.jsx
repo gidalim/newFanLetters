@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import Header from '../../components/units/layout/Header';
 import CommentCreator from '../../components/units/homeComponent/CommentCreator';
 import CommentRenderer from '../../components/units/homeComponent/CommentRenderer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getLetters } from '../../redux/modules/fanLetterSlice';
 
 function Home() {
-
+  const dispatch = useDispatch()
   const [selectedBtn, setSelectedBtn] = useState('카리나');
   const { fanLetters } = useSelector(state => state.fanLetterSlice);
   const filteredData = fanLetters.filter(item => item.selectedPage === selectedBtn)
 
+  useEffect(() => {
+    dispatch(__getLetters());
+  }, [dispatch])
+
   return (
     <>
       <Header selectedBtn={selectedBtn} setSelectedBtn={setSelectedBtn} />
-
       <StBox >
         <CommentCreator />
       </StBox>

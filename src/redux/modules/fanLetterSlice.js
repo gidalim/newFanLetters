@@ -1,20 +1,37 @@
-import initialData from "../../shared/fakedb.json";
-console.log(initialData);
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { jsonApi } from "../../axios/api";
 
-import axios from "axios";
+export const __addLetter = createAsyncThunk(
+  "addLetter",
+  async (payload, thunkAPI) => {
+    try {
+      await jsonApi.post(`/letters`, payload);
+      const { data } = await jsonApi.get(`/letters?_sort=time&_order=desc`);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.toString());
+    }
+  }
+);
 
-export const fetchFanLetters = createAsyncThunk(
-  "fanLetters/fetchFanLetters",
-  async () => {
-    const response = await axios.get("/path/to/db.json");
-    return response.data;
+export const __getLetters = createAsyncThunk(
+  "getLetters",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await jsonApi.get(`/letters`);
+      return data;
+    } catch (error) {
+      console.log("get하는 중 오류발생함", error);
+      return thunkAPI.rejectWithValue(error.toString());
+    }
   }
 );
 
 const initialState = {
-  fanLetters: initialData,
+  fanLetters: [],
+  isLoading: false,
+  isError: false,
+  error: null,
 };
 
 export const fanLetterSlice = createSlice({
@@ -37,6 +54,36 @@ export const fanLetterSlice = createSlice({
         state.fanLetters[index] = action.payload;
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(__addLetter.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(__addLetter.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.fanLetters = action.payload;
+      state.isError = false;
+      state.error = null;
+    });
+    builder.addCase(__addLetter.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.payload.toString();
+    });
+    builder.addCase(__getLetters.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(__getLetters.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.fanLetters = action.payload;
+      state.isError = false;
+      state.error = null;
+    });
+    builder.addCase(__getLetters.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.payload.toString();
+    });
   },
 });
 
