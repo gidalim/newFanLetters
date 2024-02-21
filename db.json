@@ -17,6 +17,24 @@
       "time": "2024-02-21T11:00:44.971Z",
       "selectedPage": "카리나",
       "userId": "firefly"
+    },
+    {
+      "id": "1708521797343",
+      "profile": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/452b1417-d680-472f-a229-d4019f7bd000.jpg",
+      "nickname": "sonetto",
+      "content": "오타쿠만세",
+      "time": "2024-02-21T13:23:17.343Z",
+      "selectedPage": "카리나",
+      "userId": "sonetto"
+    },
+    {
+      "id": "1708522797093",
+      "profile": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/452b1417-d680-472f-a229-d4019f7bd000.jpg",
+      "nickname": "sonetto",
+      "content": "왜 됨",
+      "time": "2024-02-21T13:39:57.093Z",
+      "selectedPage": "지젤",
+      "userId": "sonetto"
     }
   ]
 }
