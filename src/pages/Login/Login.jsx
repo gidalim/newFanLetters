@@ -13,40 +13,47 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [LoginPage, setLoginPage] = useState(false);
-  const [id, setId] = useState('')
-  const [password, setPassword] = useState('')
-  const [nickName, setNickName] = useState('')
+  const [userId, setUserId] = useState('')
+  const [userPassword, setUserPassword] = useState('')
+  const [userNickname, setUserNickname] = useState('')
 
 
-  const onSubmitUserData = (e) => {
+  const onSubmitUserData = async (e) => {
     e.preventDefault()
     if (LoginPage) {
       dispatch(login());
       alert('로그인 성공!')
       navigate('/')
     } else {
-      axios.post('https://moneyfulpublicpolicy.co.kr/register'), {
-        id, password, nickName
+      try {
+        const { data } = await axios.post('https://moneyfulpublicpolicy.co.kr/register',
+          {
+            id: userId,
+            password: userPassword,
+            nickname: userNickname,
+          }
+        )
+        if (data.success) {
+          setLoginPage(true)
+          alert('회원가입 성공!')
+          setUserId('')
+          setUserPassword('')
+          setUserNickname('')
+        }
+      } catch (error) {
+        console.error('가입실패', error.response)
       }
-
-
-
-      setLoginPage(true)
-      alert('회원가입 성공!')
-      setId('')
-      setPassword('')
-      setNickName('')
     }
   }
 
   const onChangeIdData = (e) => {
-    setId(e.target.value)
+    setUserId(e.target.value)
   }
   const onChangePassWordData = (e) => {
-    setPassword(e.target.value)
+    setUserPassword(e.target.value)
   }
   const onChangeNickNameData = (e) => {
-    setNickName(e.target.value)
+    setUserNickname(e.target.value)
   }
 
 
@@ -58,11 +65,11 @@ function Login() {
           <StDiv>
             <p>로그인</p>
             <input placeholder="아이디 입력"
-              value={id}
+              value={userId}
               onChange={onChangeIdData}
             />
             <input placeholder="패스워드 입력"
-              value={password}
+              value={userPassword}
               onChange={onChangePassWordData}
             />
             <StDiv3>
@@ -74,15 +81,15 @@ function Login() {
           <StDiv>
             <p>회원가입</p>
             <input placeholder="아이디 입력"
-              value={id}
+              value={userId}
               onChange={onChangeIdData}
             />
             <input placeholder="패스워드 입력"
-              value={password}
+              value={userPassword}
               onChange={onChangePassWordData}
             />
             <input placeholder="닉네임 입력"
-              value={nickName}
+              value={userNickname}
               onChange={onChangeNickNameData}
             />
             <StDiv3>
