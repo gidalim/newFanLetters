@@ -18,7 +18,7 @@ export const __getLetters = createAsyncThunk(
   "getLetters",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await jsonApi.get(`/letters`);
+      const { data } = await jsonApi.get(`/letters?_sort=time`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.toString());

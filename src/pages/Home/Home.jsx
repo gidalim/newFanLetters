@@ -52,7 +52,7 @@ const StBox = styled.form`
 `
 const StUl = styled.ul`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   background-color: #f3e1edad;
   border-radius: 15px;
 `
